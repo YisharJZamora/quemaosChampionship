@@ -1,0 +1,82 @@
+export class EventRaces {
+
+  races = [
+    {
+      numEvent: 1,
+      track: 1,
+      cathegory: 'GT3',
+      settings: 'racesSettings/QuemaosChampionship.pdf',
+      result: [
+        {
+          'driverId': 2,
+          'carId': 2
+        },
+        {
+          'driverId': 1,
+          'carId': 17
+        },
+        {
+          'driverId': 3,
+          'carId': 11
+        },
+      ]
+    },
+    {
+      numEvent: 2,
+      track: 2,
+      cathegory: 'SpecialEvent',
+      settings: 'racesSettings/QuemaosChampionship.pdf',
+      result: [
+        {
+          'driverId': 1,
+          'carId': 12
+        },
+        {
+          'driverId': 3,
+          'carId': 1
+        },
+        {
+          'driverId': 2,
+          'carId': 5
+        },
+      ]
+    },
+    {
+      numEvent: 3,
+      track: 3,
+      cathegory: 'Monomarca',
+      settings: 'racesSettings/QuemaosChampionship.pdf',
+      result: [
+        {
+          'driverId': 2,
+          'carId': 7
+        },
+        {
+          'driverId': 3,
+          'carId': 7
+        },
+        {
+          'driverId': 1,
+          'carId': 7
+        },
+      ]
+    }
+  ];
+
+  drivers = [
+    {
+      'id': 1,
+      'name': 'MushuRc'
+    },
+    {
+      'id': 2,
+      'name': 'xXNachoTM6Xx'
+    },
+    {
+      'id': 3,
+      'name': 'YeroRguez_10'
+    }
+  ];
+
+  points = [23, 19, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1];
+}

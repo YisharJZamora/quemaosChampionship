@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row mt-1">
+    <p-table [value]="driverRank" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+      <ng-template pTemplate="caption">
+          Clasificación General
+      </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+              <th>Piloto</th>
+              <th class="center" style="cursor: pointer;" *ngFor="let race of eventResults" (click)="showRaceRankModal(race.numEvent)">{{race.numEvent}}</th>
+              <th class="center">Puntos</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-driverRank>
+          <tr>
+              <td>{{driverRank.driver.name}}</td>
+              <td class="center" *ngFor="let points of driverRank.racePoints">{{points}}</td>
+              <td class="center">{{driverRank.totalPoints}}</td>
+          </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-dialog *ngIf="selectedRaceRank" class="center" header="Evento {{selectedRaceRank.numEvent}}" [(visible)]="displayRaceRank" [modal]="true" [style]="{width: '40vw'}"
+    [draggable]="false" [resizable]="false">
+    <p-table [value]="selectedRaceRank.results" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+      <ng-template class="center" pTemplate="caption">
+        <div style="display: inline-block;">{{selectedRaceRank.track.name}} - {{selectedRaceRank.cathegory}}</div>
+        <i class="pi pi-info-circle" style="margin-left: 20px; cursor: pointer;" (click)="showRaceSettings()"></i>
+      </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+              <th>Piloto</th>
+              <th>Coche</th>
+              <th class="center">Puntos</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-result>
+          <tr>
+              <td>{{result.driverName}}</td>
+              <td>{{result.car.name}} - {{result.car.year}}</td>
+              <td class="center">{{result.points}}</td>
+          </tr>
+      </ng-template>
+    </p-table>
+</p-dialog>
+
+<p-dialog *ngIf="selectedRaceRank" class="center" header="Configuración del evento {{selectedRaceRank.numEvent}}" [(visible)]="displayRaceSetting" [modal]="true" [style]="{width: '100vw', height: '100vh'}"
+    [draggable]="false" [resizable]="true">
+    <iframe src="{{getSettingsPath()}}" style="width: 100vw; height: 100vh;"></iframe>
+</p-dialog>

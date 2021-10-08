@@ -1,0 +1,29 @@
+.trackImg{
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+:host ::ng-deep .p-card-title {
+  font-size: 1rem;
+  text-align: center;
+  min-height: 55px;
+}
+
+:host ::ng-deep .p-card-content {
+  padding: 0;
+}
+
+:host ::ng-deep .p-datatable-thead > tr > th, :host ::ng-deep .p-datatable-tbody > tr > td, :host ::ng-deep .p-card-footer{
+  text-align: center;
+}
+
+:host ::ng-deep .p-card-body, :host ::ng-deep .p-panel-content {
+  background-color: #f3f3f3;
+}
+
+@media print
+{
+    .no-print {
+        display: none !important;
+    }
+}

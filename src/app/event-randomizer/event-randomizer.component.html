@@ -1,0 +1,93 @@
+<div style="position: relative; height: 100%;">
+  <div class="container" *ngIf="eventData">
+    <div class="row mt-1">
+      <div class="col-6">
+        <div class="row">
+          <p-card header="{{eventData.track.name}}" styleClass="p-card-shadow">
+            <ng-template pTemplate="header">
+                <img class="trackImg" alt="Card" src="assets/tracks/{{eventData.track.img}}">
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <div class="container">
+                <div class="row">
+                  <p-table [value]="rowConditions" styleClass="p-datatable-gridlines">
+                    <ng-template pTemplate="caption">
+                        Horario del evento
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Hora</th>
+                            <th>Multiplicador de tiempo</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let condition>
+                        <tr>
+                            <td>{{getHourFormatted()}}</td>
+                            <td>x{{eventData.time.multiplier}}</td>
+                        </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+                <div class="row mt-3">
+                  <p-table [value]="rowConditions" styleClass="p-datatable-gridlines">
+                    <ng-template pTemplate="caption">
+                        Condiciones del evento
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Lluvia</th>
+                            <th>Nubosidad</th>
+                            <th>Temperatura</th>
+                            <th>Aleatoriedad</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let condition>
+                        <tr>
+                            <td>{{eventData.conditions.rain}}</td>
+                            <td>{{eventData.conditions.cloudLevel}}</td>
+                            <td>{{eventData.conditions.ambientTemp}}</td>
+                            <td>{{eventData.conditions.weatherRandomness}}</td>
+                        </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+            </ng-template>
+          </p-card>
+        </div>
+        <div class="row mt-3">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <p-panel header="{{eventData.cathegory}}">
+            <p-card *ngIf="!isSpecialEvent()" header="{{eventData.car.name}}" styleClass="p-card-shadow">
+              <ng-template pTemplate="header">
+                  <img alt="Card" src="assets/cars/{{eventData.car.img}}">
+              </ng-template>
+              <ng-template pTemplate="footer">
+                {{eventData.car.year}}
+              </ng-template>
+            </p-card>
+            <div *ngIf="isSpecialEvent()" class="container">
+              <div class="row" style="justify-content: center;">
+                <div class="col-4 mb-3" *ngFor="let car of eventData.specialEventCars">
+                  <p-card header="{{car.name}}" styleClass="p-card-shadow">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" src="assets/cars/{{car.img}}">
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                      {{car.year}}
+                    </ng-template>
+                  </p-card>
+                </div>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button style="bottom: 0; right: 0; position: absolute; margin: 0 40px 20px 0;" pButton pRipple type="button" label="Print PDF" class="p-button-outlined p-button-rounded p-button-danger no-print" (click)="printPDF()"></button>
+</div>
