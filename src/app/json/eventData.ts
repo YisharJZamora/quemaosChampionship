@@ -125,21 +125,29 @@ export class EventData {
         'name': 'Porsche 991 II GT3 R',
         'year': '2019',
         'img': 'porsche-911-ii-gt3-r-2019.png'
-      },
+      }
+    ],
+    'GT3': [{
+      'id': 22,
+      'name': 'Elección Libre',
+      'year': "Prohibidos coches de DLC's",
+      'img': '202182615502277_1.jpg'
+    }],
+    'CUP': [
       {
         'id': 18,
         'name': 'Porsche 991 II GT3 Cup',
         'year': '2017',
         'img': 'porsche-911-ii-gt3-cup-2017.png'
-      }
-    ],
-    'GT3': [{
-      'id': 1,
-      'name': 'Elección Libre',
-      'year': "Prohibidos coches de DLC's",
-      'img': '202182615502277_1.jpg'
-    }]
+      }]
   };
+
+  public getAllCars() {
+    let allCars: Array<any> = [];
+    this.cars.Monomarca.forEach(car => {allCars.push(car)});
+    this.cars.CUP.forEach(car => {allCars.push(car)});
+    return allCars;
+  }
 
 
   tracks = [

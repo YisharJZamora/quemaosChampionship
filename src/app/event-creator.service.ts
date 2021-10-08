@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventData } from './json/eventData';
+import { EventRaces } from './json/eventRaces';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,13 @@ export class EventCreatorService {
     'time': {'hour':0, 'multiplier': 0},
     'conditions': {'rain': '', 'cloudLevel': '', 'ambientTemp': 0, 'weatherRandomness': 0}
   }
+  private isGT3Event = false;
 
   constructor() {
     this.generateEvent();
   }
 
-
+  private eventRaces = new EventRaces();
   private eventData = new EventData();
 
   private generateEvent(){
@@ -29,11 +31,34 @@ export class EventCreatorService {
     this.selectConditions();
   }
 
+  private selectTrack() {
+    let usedTracks: Array<any> = [];
+    this.eventRaces.races.forEach(race => usedTracks.push(race.track));
+    let tracksLeft = this.eventData.tracks.filter((track:any) => !usedTracks.includes(track.id));
+
+    this.eventSettings.track = this.randomizer(tracksLeft);
+  }
+
   private selectCathegory() {
+    let numberPorscheCupDone = 0;
+    this.eventRaces.races.forEach(race => {
+      if(race.cathegory === 'GT3 Porsche Cup') numberPorscheCupDone += 1;
+    });
+    let numberMonoDone = 0;
+    this.eventRaces.races.forEach(race => {
+      if(race.cathegory === 'Monomarca') numberMonoDone += 1;
+    });
+
     if(this.isSpecialEvent()) {
       this.eventSettings.cathegory = this.specialEventCathegory();
+      return;
     } else {
-      this.eventSettings.cathegory = this.randomizer(this.eventData.cathegories);
+      this.isGT3Event = this.randomIntNumber(0,3) || numberPorscheCupDone >= 3 ? true : false;
+    }
+    if(this.isGT3Event) {
+      this.eventSettings.cathegory = this.randomIntNumber(0,3) || numberMonoDone >= 3 ? 'GT3' : 'Monomarca';
+    } else {
+      this.eventSettings.cathegory = 'GT3 Porsche Cup';
     }
   }
 
@@ -41,20 +66,49 @@ export class EventCreatorService {
     if(this.isSpecialEvent()) {
       this.eventSettings.specialEventCars = this.specialEventCars();
     } else {
-      let selectedCathegoryList = this.eventSettings.cathegory === 'GT3' ? this.eventData.cars.GT3 : this.eventData.cars.Monomarca;
-      this.eventSettings.car = this.randomizer(selectedCathegoryList);
+      let selectedCarList: Array<any> = [];
+      switch (this.eventSettings.cathegory) {
+        case 'GT3 Porsche Cup':{
+          selectedCarList = this.eventData.cars.CUP;
+          break;
+        }
+        case 'GT3':{
+          selectedCarList = this.eventData.cars.GT3;
+          break;
+        }
+        case 'Monomarca':{
+          let allMonoCars = this.eventData.cars.Monomarca;
+          let usedMonoCars: Array<any> = [];
+          this.eventRaces.races.forEach(race => {
+            if(race.cathegory === 'Monomarca'){
+              usedMonoCars.push(race.result[0].carId);
+            }
+          });
+          let monoCarsLeft = this.eventData.cars.Monomarca.filter((car:any) => !usedMonoCars.includes(car.id));
+          selectedCarList = monoCarsLeft;
+          break;
+        }
+      }
+      this.eventSettings.car = this.randomizer(selectedCarList);
     }
   }
 
-  private selectTrack() {
-    this.eventSettings.track = this.randomizer(this.eventData.tracks);
+  private selectTime() {
+    this.eventSettings.time.hour = this.randomIntNumber(0, 23);
+    this.eventSettings.time.multiplier = this.randomIntNumber(1, 4);
   }
 
-  private randomizer (options: [...any]): any {
-    let min = 1;
-    let max = options.length;
-    let result = Math.floor(Math.random() * (max - min + 1) + min);
-    return options[result - 1];
+  private selectConditions() {
+    let isNotRaining = this.randomIntNumber(0, 5);
+    this.eventSettings.conditions.rain = isNotRaining ? '0' : this.randomFloatNumber();
+    this.eventSettings.conditions.cloudLevel = this.randomFloatNumber();
+    this.eventSettings.conditions.ambientTemp = this.randomIntNumber(15, 40);
+    this.eventSettings.conditions.weatherRandomness = this.randomIntNumber(1, 5);
+  }
+
+  public isSpecialEvent() {
+    return this.eventSettings.track.name === 'Misano' || this.eventSettings.track.name === 'Suzuka'
+    || this.eventSettings.track.name === 'Nurburgring' || this.eventSettings.track.name === 'Brands Hatch';
   }
 
   private specialEventCathegory(): any {
@@ -84,53 +138,51 @@ export class EventCreatorService {
     let eventCars = [];
     switch (this.eventSettings.track.name) {
       case 'Misano': {
-        eventCars.push(this.eventData.cars.Monomarca.filter(car => car.id === 7)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 9)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 10)[0]);
+        eventCars.push(
+          this.eventData.cars.Monomarca.filter(car => car.id === 7)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 9)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 10)[0]);
         break;
       }
       case 'Suzuka': {
-        eventCars.push(this.eventData.cars.Monomarca.filter(car => car.id === 20)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 8)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 11)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 14)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 15)[0]);
+        eventCars.push(
+          this.eventData.cars.Monomarca.filter(car => car.id === 20)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 8)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 11)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 14)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 15)[0]);
         break;
       }
       case 'Nurburgring': {
-        eventCars.push(this.eventData.cars.Monomarca.filter(car => car.id === 3)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 4)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 6)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 13)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 16)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 17)[0]);
+        eventCars.push(
+          this.eventData.cars.Monomarca.filter(car => car.id === 3)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 4)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 6)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 13)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 16)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 17)[0]);
         break;
       }
       case 'Brands Hatch': {
-        eventCars.push(this.eventData.cars.Monomarca.filter(car => car.id === 1)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 2)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 19)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 5)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 21)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 12)[0],
-        this.eventData.cars.Monomarca.filter(car => car.id === 13)[0]);
+        eventCars.push(
+          this.eventData.cars.Monomarca.filter(car => car.id === 1)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 2)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 19)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 5)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 21)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 12)[0],
+          this.eventData.cars.Monomarca.filter(car => car.id === 13)[0]);
         break;
       }
     }
     return eventCars;
   }
 
-  private selectTime() {
-    this.eventSettings.time.hour = this.randomIntNumber(0, 23);
-    this.eventSettings.time.multiplier = this.randomIntNumber(1, 4);
-  }
-
-  private selectConditions() {
-    let isNotRaining = this.randomIntNumber(0, 5);
-    this.eventSettings.conditions.rain = isNotRaining ? '0' : this.randomFloatNumber();
-    this.eventSettings.conditions.cloudLevel = this.randomFloatNumber();
-    this.eventSettings.conditions.ambientTemp = this.randomIntNumber(15, 40);
-    this.eventSettings.conditions.weatherRandomness = this.randomIntNumber(1, 5);
+  private randomizer (options: [...any]): any {
+    let min = 1;
+    let max = options.length;
+    let result = Math.floor(Math.random() * (max - min + 1) + min);
+    return options[result - 1];
   }
 
   private randomIntNumber(min: number, max: number) {
@@ -148,10 +200,5 @@ export class EventCreatorService {
 
   public getEvent() {
     return this.eventSettings;
-  }
-
-  public isSpecialEvent() {
-    return this.eventSettings.track.name === 'Misano' || this.eventSettings.track.name === 'Suzuka'
-    || this.eventSettings.track.name === 'Nurburgring' || this.eventSettings.track.name === 'Brands Hatch';
   }
 }

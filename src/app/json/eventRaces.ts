@@ -60,6 +60,66 @@ export class EventRaces {
           'carId': 7
         },
       ]
+    },
+    {
+      numEvent: 4,
+      track: 4,
+      cathegory: 'GT3 Porsche Cup',
+      settings: 'raceSettings/QuemaosChampionship.pdf',
+      result: [
+        {
+          'driverId': 2,
+          'carId': 18
+        },
+        {
+          'driverId': 3,
+          'carId': 18
+        },
+        {
+          'driverId': 1,
+          'carId': 18
+        },
+      ]
+    },
+    {
+      numEvent: 5,
+      track: 5,
+      cathegory: 'GT3 Porsche Cup',
+      settings: 'raceSettings/QuemaosChampionship.pdf',
+      result: [
+        {
+          'driverId': 2,
+          'carId': 18
+        },
+        {
+          'driverId': 3,
+          'carId': 18
+        },
+        {
+          'driverId': 1,
+          'carId': 18
+        },
+      ]
+    },
+    {
+      numEvent: 6,
+      track: 7,
+      cathegory: 'Monomarca',
+      settings: 'raceSettings/QuemaosChampionship.pdf',
+      result: [
+        {
+          'driverId': 2,
+          'carId': 6
+        },
+        {
+          'driverId': 3,
+          'carId': 6
+        },
+        {
+          'driverId': 1,
+          'carId': 6
+        },
+      ]
     }
   ];
 

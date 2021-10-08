@@ -19,9 +19,21 @@ export class AppMenuComponent implements OnInit {
         {label: 'Generar Evento', icon: 'pi pi-fw pi-pencil', routerLink: '/event-randomizer'}
     ];
     this.activeItem = this.items[0];
+    this.selectMenuItemActive();
   }
 
   ngOnInit() {
+  }
+
+  selectMenuItemActive() {
+    if(window.location.href.includes('/rank')) {
+      this.activeItem = this.items[1];
+      return;
+    }
+    if(window.location.href.includes('/event-randomizer')) {
+      this.activeItem = this.items[2];
+      return;
+    }
   }
 
 }

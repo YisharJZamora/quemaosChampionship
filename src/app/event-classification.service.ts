@@ -57,7 +57,7 @@ export class EventClassificationService {
     race.result.forEach((driverInfo, index) => {
       let result = {
         'driverName': this.eventRaces.drivers.filter(driver => driver.id == driverInfo.driverId)[0].name,
-        'car': this.eventData.cars.Monomarca.filter((car:any) => car.id == race.result.filter(raceResult => raceResult.driverId == driverInfo.driverId)[0].carId)[0],
+        'car': this.eventData.getAllCars().filter((car:any) => car.id == race.result.filter(raceResult => raceResult.driverId == driverInfo.driverId)[0].carId)[0],
         'points': this.eventRaces.points[index]
       };
       results.push(result);
