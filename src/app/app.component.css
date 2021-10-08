@@ -17,3 +17,11 @@
   right: 0;
   margin-right: 0.85vw;
 }
+
+
+@media print
+{
+    .no-print {
+        display: none !important;
+    }
+}

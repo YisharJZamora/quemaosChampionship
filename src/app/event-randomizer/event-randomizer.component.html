@@ -1,4 +1,9 @@
 <div style="position: relative; height: 100%;">
+  <div class="only-print dateCertificate">
+    Ajustes para Evento {{getCurrentNumEvent()}}
+    <br>
+    FECHA Y HORA DE IMPRESIÓN: {{getDate()}}
+  </div>
   <div class="container" *ngIf="eventData">
     <div class="row mt-1">
       <div class="col-6">

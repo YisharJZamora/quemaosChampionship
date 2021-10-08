@@ -3,6 +3,18 @@
   border-top-right-radius: 4px;
 }
 
+.only-print {
+  display: none;
+}
+
+.dateCertificate {
+  text-align: center;
+  padding-top: 2.5vh;
+  font-size: 1.5rem;
+  height: 10vh;
+  color: white;
+}
+
 :host ::ng-deep .p-card-title {
   font-size: 1rem;
   text-align: center;
@@ -31,9 +43,14 @@
   border-bottom-left-radius: 4px;
 }
 
+
 @media print
 {
-    .no-print {
-        display: none !important;
-    }
+  .only-print {
+    display: block;
+  }
+
+  .no-print {
+    display: none !important;
+  }
 }
