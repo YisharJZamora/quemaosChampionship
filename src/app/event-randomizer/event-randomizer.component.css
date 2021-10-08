@@ -15,17 +15,24 @@
   color: white;
 }
 
-:host ::ng-deep .p-card-title {
+:host ::ng-deep .car  .p-card-body  .p-card-title {
   font-size: 1rem;
+  min-height: 5rem;
+}
+
+:host ::ng-deep .track  .p-card-body  .p-card-title {
+  min-height: 3.5rem;
+}
+
+:host ::ng-deep .p-card-title {
   text-align: center;
-  min-height: 55px;
 }
 
 :host ::ng-deep .p-card-content {
   padding: 0;
 }
 
-:host ::ng-deep .p-datatable-thead > tr > th, :host ::ng-deep .p-datatable-tbody > tr > td, :host ::ng-deep .p-card-footer{
+:host ::ng-deep .p-datatable-thead > tr > th, :host ::ng-deep .p-datatable-tbody > tr > td, :host ::ng-deep .p-card-footer, .center{
   text-align: center;
 }
 
