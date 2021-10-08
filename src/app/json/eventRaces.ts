@@ -5,7 +5,7 @@ export class EventRaces {
       numEvent: 1,
       track: 1,
       cathegory: 'GT3',
-      settings: 'racesSettings/QuemaosChampionship.pdf',
+      settings: 'raceSettings/QuemaosChampionship.pdf',
       result: [
         {
           'driverId': 2,
@@ -25,7 +25,7 @@ export class EventRaces {
       numEvent: 2,
       track: 2,
       cathegory: 'SpecialEvent',
-      settings: 'racesSettings/QuemaosChampionship.pdf',
+      settings: 'raceSettings/QuemaosChampionship.pdf',
       result: [
         {
           'driverId': 1,
@@ -45,7 +45,7 @@ export class EventRaces {
       numEvent: 3,
       track: 3,
       cathegory: 'Monomarca',
-      settings: 'racesSettings/QuemaosChampionship.pdf',
+      settings: 'raceSettings/QuemaosChampionship.pdf',
       result: [
         {
           'driverId': 2,

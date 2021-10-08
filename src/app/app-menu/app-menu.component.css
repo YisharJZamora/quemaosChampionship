@@ -1,0 +1,7 @@
+:host ::ng-deep .p-tabmenuitem {
+  margin: 0 0.5vh;
+}
+
+:host ::ng-deep .p-tabmenu {
+  margin-top: 0.5vh;
+}

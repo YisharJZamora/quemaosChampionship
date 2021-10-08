@@ -13,13 +13,19 @@ import { RankPageComponent } from './rank-page/rank-page.component';
 import { TotalRankComponent } from './total-rank/total-rank.component';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {MenuModule} from 'primeng/menu';
+import {MenuItem} from 'primeng/api';
+import {MegaMenuItem} from 'primeng/api';
+import { AppMenuComponent } from './app-menu/app-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventRandomizerComponent,
     RankPageComponent,
-    TotalRankComponent
+    TotalRankComponent,
+    AppMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,9 @@ import {ButtonModule} from 'primeng/button';
     CardModule,
     TableModule,
     DialogModule,
-    ButtonModule
+    ButtonModule,
+    TabMenuModule,
+    MenuModule
   ],
   providers: [SharedModule, PrimeNGConfig],
   bootstrap: [AppComponent]

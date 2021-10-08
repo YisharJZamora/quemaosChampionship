@@ -1,0 +1,19 @@
+.img{
+  position: absolute;
+  height: 94vh;
+  width: 14.5vw;
+  top: 0;
+  margin-top: 5vh;
+  background-size: cover;
+  background-position: top;
+  border-radius: 6px;
+  z-index: -10;
+}
+.imgLeft {
+  left: 0;
+  margin-left: 0.85vw;
+}
+.imgRight {
+  right: 0;
+  margin-right: 0.85vw;
+}
