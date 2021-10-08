@@ -14,7 +14,6 @@ export class TotalRankComponent implements OnInit {
   eventResults;
   selectedRaceRank: any;
   displayRaceRank = false;
-  displayRaceSetting = false;
   constructor(
     private eventClassification: EventClassificationService,
     private sanitizer: DomSanitizer
@@ -33,15 +32,4 @@ export class TotalRankComponent implements OnInit {
 
     this.displayRaceRank = true;
   }
-  showRaceSettings() {
-    this.displayRaceSetting = true;
-  }
-  getSettingsPath() {
-    let path = '../../assets/'+ this.selectedRaceRank.settings;
-    let securePath = 'https://github.com/YisharJZamora/quemaosChampionship/raw/develop/src/assets/racesSettings/QuemaosChampionship.pdf'
-    console.log(securePath);
-
-    return securePath;
-  }
-
 }
