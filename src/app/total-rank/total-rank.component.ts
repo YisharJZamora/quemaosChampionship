@@ -38,7 +38,7 @@ export class TotalRankComponent implements OnInit {
   }
   getSettingsPath() {
     let path = '../../assets/'+ this.selectedRaceRank.settings;
-    let securePath = this.sanitizer.bypassSecurityTrustUrl(path)
+    let securePath = 'https://github.com/YisharJZamora/quemaosChampionship/raw/develop/src/assets/racesSettings/QuemaosChampionship.pdf'
     console.log(securePath);
 
     return securePath;
