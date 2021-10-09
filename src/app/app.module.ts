@@ -15,9 +15,9 @@ import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {MenuModule} from 'primeng/menu';
-import {MenuItem} from 'primeng/api';
-import {MegaMenuItem} from 'primeng/api';
 import { AppMenuComponent } from './app-menu/app-menu.component';
+import { HomeComponent } from './home/home.component';
+import {DividerModule} from 'primeng/divider';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { AppMenuComponent } from './app-menu/app-menu.component';
     RankPageComponent,
     TotalRankComponent,
     AppMenuComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,8 @@ import { AppMenuComponent } from './app-menu/app-menu.component';
     DialogModule,
     ButtonModule,
     TabMenuModule,
-    MenuModule
+    MenuModule,
+    DividerModule
   ],
   providers: [SharedModule, PrimeNGConfig],
   bootstrap: [AppComponent]

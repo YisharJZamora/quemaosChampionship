@@ -1,0 +1,21 @@
+:host ::ng-deep .p-panel-header {
+  text-align: center;
+}
+
+:host ::ng-deep .weDo .p-panel .p-toggleable-content .p-panel-content {
+  text-align: center;
+}
+
+:host ::ng-deep .p-panel-content {
+  padding: 0;
+}
+
+:host ::ng-deep .p-divider.p-divider-horizontal {
+  margin: 0;
+  padding: 1rem 0 0 0;
+}
+
+.marginLeft {
+  margin-left: 3vw;
+  margin-bottom: 0;
+}
