@@ -70,10 +70,11 @@ export class EventCreatorService {
       switch (this.eventSettings.cathegory) {
         case 'GT3 Porsche Cup':{
           selectedCarList = this.eventData.cars.CUP;
+          this.eventSettings.car = this.randomizer(selectedCarList);
           break;
         }
         case 'GT3':{
-          selectedCarList = this.eventData.cars.GT3;
+          this.eventSettings.car = this.eventData.cars.Monomarca;
           break;
         }
         case 'Monomarca':{
@@ -86,10 +87,10 @@ export class EventCreatorService {
           });
           let monoCarsLeft = this.eventData.cars.Monomarca.filter((car:any) => !usedMonoCars.includes(car.id));
           selectedCarList = monoCarsLeft;
+          this.eventSettings.car = this.randomizer(selectedCarList);
           break;
         }
       }
-      this.eventSettings.car = this.randomizer(selectedCarList);
     }
   }
 

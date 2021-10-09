@@ -18,6 +18,7 @@ import {MenuModule} from 'primeng/menu';
 import { AppMenuComponent } from './app-menu/app-menu.component';
 import { HomeComponent } from './home/home.component';
 import {DividerModule} from 'primeng/divider';
+import {CarouselModule} from 'primeng/carousel';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {DividerModule} from 'primeng/divider';
     ButtonModule,
     TabMenuModule,
     MenuModule,
-    DividerModule
+    DividerModule,
+    CarouselModule
   ],
   providers: [SharedModule, PrimeNGConfig],
   bootstrap: [AppComponent]

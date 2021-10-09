@@ -63,6 +63,15 @@
   border-bottom-left-radius: 4px;
 }
 
+:host ::ng-deep .p-carousel {
+  margin-top: 0 !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+:host ::ng-deep .p-highlight button {
+  background-color: white !important;
+}
 
 @media print
 {

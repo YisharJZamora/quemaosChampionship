@@ -14,10 +14,29 @@ export class EventRandomizerComponent implements OnInit {
   eventRaces = new EventRaces();
   rowConditions = [1];
 
+	responsiveOptions: any;
   constructor(
     private eventCreator: EventCreatorService,
     private eventClassification: EventClassificationService
-  ) { }
+  ) {
+		this.responsiveOptions = [
+            {
+                breakpoint: '1024px',
+                numVisible: 3,
+                numScroll: 3
+            },
+            {
+                breakpoint: '768px',
+                numVisible: 2,
+                numScroll: 2
+            },
+            {
+                breakpoint: '560px',
+                numVisible: 1,
+                numScroll: 1
+            }
+        ];
+  }
 
   ngOnInit(): void {
     this.eventData = this.eventCreator.getEvent();
@@ -44,5 +63,9 @@ export class EventRandomizerComponent implements OnInit {
 
   getCurrentNumEvent() {
     return this.eventRaces.races.length + 1;
+  }
+
+  getGT3Cars() {
+    return this.eventData.car;
   }
 }
