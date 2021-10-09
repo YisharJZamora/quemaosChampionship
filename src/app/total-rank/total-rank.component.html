@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<p-dialog *ngIf="selectedRaceRank" class="center" header="Clasificación Evento {{selectedRaceRank.numEvent}}" [(visible)]="displayRaceRank" [modal]="true" [style]="{width: '40vw'}"
+<p-dialog *ngIf="selectedRaceRank" class="center" header="Clasificación Evento {{selectedRaceRank.numEvent}}" [(visible)]="displayRaceRank" [modal]="true"
     [draggable]="false" [resizable]="false">
     <p-table [value]="selectedRaceRank.results" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
       <ng-template class="center" pTemplate="caption">
@@ -35,7 +35,7 @@
       </ng-template>
       <ng-template pTemplate="header">
           <tr>
-            <th class="center">Posición</th>
+            <th class="center mobileHide">Posición</th>
             <th>Piloto</th>
             <th>Coche</th>
             <th class="center">Puntos</th>
@@ -43,7 +43,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-result let-i="rowIndex">
           <tr>
-            <td class="center">{{i+1}}º</td>
+            <td class="center mobileHide">{{i+1}}º</td>
             <td>{{result.driverName}}</td>
             <td>{{result.car.name}} - {{result.car.year}}</td>
             <td class="center">{{result.points}}</td>

@@ -15,6 +15,10 @@
   color: white;
 }
 
+.mobileOnly {
+  display: none;
+}
+
 :host ::ng-deep .car  .p-card-body  .p-card-title {
   font-size: 1rem;
   min-height: 5rem;
@@ -43,6 +47,7 @@
 }
 
 :host ::ng-deep .p-card-body, :host ::ng-deep .p-panel-content {
+  text-align: center;
   background-color: #2d3744;
   border: 1px solid #3f4b5b;
   border-top: 0px;
@@ -59,5 +64,13 @@
 
   .no-print {
     display: none !important;
+  }
+}
+@media (max-width: 960px) {
+  .mobileHide {
+    display: none;
+  }
+  .mobileOnly {
+    display: flex;
   }
 }

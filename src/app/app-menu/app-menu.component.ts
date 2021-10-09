@@ -16,7 +16,7 @@ export class AppMenuComponent implements OnInit {
     this.items = [
         {label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: '/'},
         {label: 'Clasificación', icon: 'pi pi-fw pi-list', routerLink: '/rank'},
-        {label: 'Generar Evento', icon: 'pi pi-fw pi-pencil', routerLink: '/event-randomizer'}
+        {label: 'Generador', icon: 'pi pi-fw pi-pencil', routerLink: '/event-randomizer'}
     ];
     this.activeItem = this.items[0];
     this.selectMenuItemActive();

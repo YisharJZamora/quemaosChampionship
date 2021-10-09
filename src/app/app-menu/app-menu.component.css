@@ -35,3 +35,14 @@
   font-size: 2.2rem;
   margin: -0.4vh 1vw 0 1vw;
 }
+
+@media (max-width: 1429px) {
+  .logoBox {
+    position: relative;
+  }
+
+  :host ::ng-deep .p-tabmenu-nav {
+    margin-top: 0;
+    justify-content: center;
+  }
+ }

@@ -6,14 +6,48 @@
   </div>
   <div class="container" *ngIf="eventData">
     <div class="row mt-1">
-      <div class="col-6">
+      <div class="col-xl-6 col-12">
         <div class="row">
           <p-card header="{{eventData.track.name}}" styleClass="p-card-shadow" class="track">
             <ng-template pTemplate="header">
                 <img class="trackImg" alt="Card" src="assets/tracks/{{eventData.track.img}}">
             </ng-template>
             <div class="container">
-              <div class="row">
+              <div class="row mobileOnly">
+                <div class="col mt-2">
+                  <p-panel header="Hora">
+                    {{getHourFormatted()}}
+                  </p-panel>
+                </div>
+                <div class="col mt-2">
+                  <p-panel header="Multiplicador">
+                    {{eventData.time.multiplier}}
+                  </p-panel>
+                </div>
+              </div>
+              <div class="row mobileOnly">
+                <div class="col mt-2">
+                  <p-panel header="Lluvia">
+                    {{eventData.conditions.rain}}
+                  </p-panel>
+                </div>
+                <div class="col mt-2">
+                  <p-panel header="Nubosidad">
+                    {{eventData.conditions.cloudLevel}}
+                  </p-panel>
+                </div>
+                <div class="col mt-2">
+                  <p-panel header="Temperatura">
+                    {{eventData.conditions.ambientTemp}}
+                  </p-panel>
+                </div>
+                <div class="col mt-2">
+                  <p-panel header="Aleatoriedad">
+                    {{eventData.conditions.weatherRandomness}}
+                  </p-panel>
+                </div>
+              </div>
+              <div class="row mobileHide">
                 <p-table [value]="rowConditions" styleClass="p-datatable-gridlines">
                   <ng-template pTemplate="caption">
                       Horario del evento
@@ -32,7 +66,7 @@
                   </ng-template>
                 </p-table>
               </div>
-              <div class="row mt-3">
+              <div class="row mt-3 mobileHide">
                 <p-table [value]="rowConditions" styleClass="p-datatable-gridlines">
                   <ng-template pTemplate="caption">
                       Condiciones del evento
@@ -76,7 +110,7 @@
         <div class="row mt-3">
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-xl-6 col-12 mb-4">
         <div class="row">
           <p-panel header="{{eventData.cathegory}}">
             <p-card *ngIf="!isSpecialEvent()" header="{{eventData.car.name}}" styleClass="p-card-shadow"  class="car">
@@ -107,5 +141,5 @@
     </div>
   </div>
 
-  <button style="bottom: 0; right: 0; position: absolute; margin: 0 40px 20px 0;" pButton pRipple type="button" label="Print PDF" class="p-button-outlined p-button-rounded p-button-danger no-print" (click)="printPDF()"></button>
+  <button style="bottom: 0; right: 0; position: fixed; margin: 0 40px 20px 0;" pButton pRipple type="button" label="Print PDF" class="p-button-outlined p-button-rounded p-button-danger no-print" (click)="printPDF()"></button>
 </div>
