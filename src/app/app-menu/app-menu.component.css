@@ -46,3 +46,16 @@
     justify-content: center;
   }
  }
+@media(max-width: 469px){
+  :host ::ng-deep .p-menuitem-text {
+    display: none;
+  }
+  :host ::ng-deep .p-menuitem-icon {
+    margin-right: 0 !important;
+  }
+}
+@media(max-width: 389px){
+  .menuLogo {
+    display: none;
+  }
+}
