@@ -19,6 +19,14 @@
   display: none;
 }
 
+
+:host ::ng-deep .p-card-body {
+  padding: 0.1rem !important;
+  overflow: overlay;
+  white-space: normal;
+  text-overflow: unset
+}
+
 :host ::ng-deep .car  .p-card-body  .p-card-title {
   font-size: 1rem;
   min-height: 5rem;
