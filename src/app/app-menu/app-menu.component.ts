@@ -14,7 +14,7 @@ export class AppMenuComponent implements OnInit {
 
   constructor() {
     this.items = [
-        {label: 'Quemaos Randomizaos', icon: 'pi pi-fw pi-home', routerLink: '/'},
+        {label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: '/'},
         {label: 'Clasificación', icon: 'pi pi-fw pi-list', routerLink: '/rank'},
         {label: 'Generar Evento', icon: 'pi pi-fw pi-pencil', routerLink: '/event-randomizer'}
     ];

@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Comication";
+  src: local("Comication"), url(./assets/fonts/Comication.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "rechargebd";
+  src: local("rechargebd"), url(./assets/fonts/rechargebd.ttf) format("truetype");
+}

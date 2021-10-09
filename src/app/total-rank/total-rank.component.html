@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<p-dialog *ngIf="selectedRaceRank" class="center" header="Evento {{selectedRaceRank.numEvent}}" [(visible)]="displayRaceRank" [modal]="true" [style]="{width: '40vw'}"
+<p-dialog *ngIf="selectedRaceRank" class="center" header="Clasificación Evento {{selectedRaceRank.numEvent}}" [(visible)]="displayRaceRank" [modal]="true" [style]="{width: '40vw'}"
     [draggable]="false" [resizable]="false">
     <p-table [value]="selectedRaceRank.results" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
       <ng-template class="center" pTemplate="caption">

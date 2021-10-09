@@ -2,6 +2,36 @@
   margin: 0 0.5vh;
 }
 
+:host ::ng-deep .p-menuitem-text {
+  font-family: Comication;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: lighter !important ;
+}
+
 :host ::ng-deep .p-tabmenu {
   margin-top: 0.5vh;
+}
+
+.logoBox {
+  width: fit-content;
+  z-index: 10;
+  right: 0;
+  left: 0;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.menuLogo {
+  height: 4vh;
+  filter: invert(96%) sepia(97%) saturate(12%) hue-rotate(237deg) brightness(103%) contrast(103%);
+  margin-top: -1vh;
+}
+.logoText {
+  display: inline-block;
+  color: white;
+  font-family: Comication;
+  font-size: 2.2rem;
+  margin: -0.4vh 1vw 0 1vw;
 }

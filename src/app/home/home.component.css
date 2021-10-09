@@ -1,5 +1,8 @@
-:host ::ng-deep .p-panel-header {
-  text-align: center;
+:host ::ng-deep .p-panel-header, :host ::ng-deep .p-panel-title {
+  font-family: Comication;
+  font-size: 2rem;
+  font-weight: lighter !important;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 :host ::ng-deep .weDo .p-panel .p-toggleable-content .p-panel-content {
@@ -18,4 +21,10 @@
 .marginLeft {
   margin-left: 3vw;
   margin-bottom: 0;
+}
+
+.logo {
+  height: 25vh;
+  z-index: 10;
+  filter: invert(96%) sepia(97%) saturate(12%) hue-rotate(237deg) brightness(103%) contrast(103%);
 }
