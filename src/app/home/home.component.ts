@@ -11,5 +11,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  getEventDate(){
+    return new Date(2018, 10, 11, 20, 0, 0);
+  }
 
 }
