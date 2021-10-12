@@ -16,7 +16,7 @@ export class RequestService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCars() {
-    return this.http.get(`${this.baseUrl}/api/cars/allCars`)
+  getEvent() {
+    return this.http.get(`${this.baseUrl}/newEvent`)
   }
 }

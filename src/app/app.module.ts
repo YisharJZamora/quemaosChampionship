@@ -20,6 +20,7 @@ import { AppMenuComponent } from './app-menu/app-menu.component';
 import { HomeComponent } from './home/home.component';
 import {DividerModule} from 'primeng/divider';
 import {CarouselModule} from 'primeng/carousel';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {CarouselModule} from 'primeng/carousel';
     MenuModule,
     DividerModule,
     CarouselModule,
-    HttpClientModule
+    HttpClientModule,
+    ProgressSpinnerModule
   ],
   providers: [SharedModule, PrimeNGConfig],
   bootstrap: [AppComponent]

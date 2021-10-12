@@ -1,6 +1,6 @@
-<div style="position: relative; height: 100%;">
+<div *ngIf="dataReady" style="position: relative; height: 100%;">
   <div class="only-print dateCertificate">
-    Ajustes para Evento {{getCurrentNumEvent()}}
+    Ajustes para Temporada {{eventData.season}} - Evento {{eventData.number}}
     <br>
     FECHA Y HORA DE IMPRESIÓN: {{getDate()}}
   </div>
@@ -10,40 +10,40 @@
         <div class="row">
           <p-card header="{{eventData.track.name}}" styleClass="p-card-shadow" class="track">
             <ng-template pTemplate="header">
-                <img class="trackImg" alt="Card" src="assets/tracks/{{eventData.track.img}}">
+                <img class="trackImg" alt="Card" src="assets/tracks/{{eventData.track.image_path}}">
             </ng-template>
             <div class="container">
               <div class="row mobileOnly">
                 <div class="col mt-2">
                   <p-panel header="Hora">
-                    {{getHourFormatted()}}
+                    {{eventData.settings.hour}}
                   </p-panel>
                 </div>
                 <div class="col mt-2">
                   <p-panel header="Multiplicador">
-                    {{eventData.time.multiplier}}
+                    {{eventData.settings.timeMultiplier}}
                   </p-panel>
                 </div>
               </div>
               <div class="row mobileOnly">
                 <div class="col mt-2">
                   <p-panel header="Lluvia">
-                    {{eventData.conditions.rain}}
+                    {{eventData.settings.rain}}
                   </p-panel>
                 </div>
                 <div class="col mt-2">
                   <p-panel header="Nubosidad">
-                    {{eventData.conditions.cloudLevel}}
+                    {{eventData.settings.cloudLevel}}
                   </p-panel>
                 </div>
                 <div class="col mt-2">
                   <p-panel header="Temperatura">
-                    {{eventData.conditions.ambientTemp}}
+                    {{eventData.settings.temperature}}
                   </p-panel>
                 </div>
                 <div class="col mt-2">
                   <p-panel header="Aleatoriedad">
-                    {{eventData.conditions.weatherRandomness}}
+                    {{eventData.settings.weatherRandomness}}
                   </p-panel>
                 </div>
               </div>
@@ -60,8 +60,8 @@
                   </ng-template>
                   <ng-template pTemplate="body" let condition>
                       <tr>
-                          <td>{{getHourFormatted()}}</td>
-                          <td>x{{eventData.time.multiplier}}</td>
+                          <td>{{eventData.settings.hour}}</td>
+                          <td>{{eventData.settings.timeMultiplier}}</td>
                       </tr>
                   </ng-template>
                 </p-table>
@@ -81,10 +81,10 @@
                   </ng-template>
                   <ng-template pTemplate="body" let condition>
                       <tr>
-                          <td>{{eventData.conditions.rain}}</td>
-                          <td>{{eventData.conditions.cloudLevel}}</td>
-                          <td>{{eventData.conditions.ambientTemp}}</td>
-                          <td>{{eventData.conditions.weatherRandomness}}</td>
+                          <td>{{eventData.settings.rain}}</td>
+                          <td>{{eventData.settings.cloudLevel}}</td>
+                          <td>{{eventData.settings.temperature}}</td>
+                          <td>{{eventData.settings.weatherRandomness}}</td>
                       </tr>
                   </ng-template>
                 </p-table>
@@ -112,12 +112,12 @@
       </div>
       <div class="col-xl-6 col-12 mb-4">
         <div class="row">
-          <p-panel header="{{eventData.cathegory}}">
-            <p-card *ngIf="!isSpecialEvent()" header="{{eventData.cathegory === 'Monomarca' || eventData.cathegory === 'GT3 Porsche Cup' ? eventData.car.name : 'Prohibido coches de DLCs'}}" styleClass="p-card-shadow"  class="car">
+          <p-panel header="{{eventData.cathegory.name}}">
+            <p-card *ngIf="!isSpecialEvent()" header="{{eventData.cathegory.id != 25 ? eventData.carOptions[0].brand_name + ' ' + eventData.carOptions[0].model_name : 'Prohibido coches de DLCs'}}" styleClass="p-card-shadow"  class="car">
               <ng-template pTemplate="header">
-                <img *ngIf="eventData.cathegory === 'Monomarca' || eventData.cathegory === 'GT3 Porsche Cup'" alt="Card" src="assets/cars/{{eventData.car.img}}">
+                <img *ngIf="eventData.cathegory.id != 25" alt="Card" src="assets/cars/{{eventData.carOptions[0].image_path}}">
 
-                <p-carousel *ngIf="eventData.cathegory === 'GT3'" [value]="getGT3Cars()" orientation="vertical" [style]="{'max-width':'400px'}" verticalViewPortHeight="360px" [numVisible]="1" [numScroll]="1" [circular]='true'>
+                <p-carousel *ngIf="eventData.cathegory.id == 25" [value]="eventData.carOptions" orientation="vertical" [style]="{'max-width':'400px'}" verticalViewPortHeight="360px" [numVisible]="1" [numScroll]="1" [circular]='true'>
                   <ng-template pTemplate="header">
                       <h5>GT3 Permitidos</h5>
                   </ng-template>
@@ -125,10 +125,11 @@
                       <div class="product-item">
                           <div class="product-item-content">
                               <div class="p-mb-3">
-                                  <img src="../../assets/cars/{{car.img}}" [alt]="car.name" class="product-image" />
+                                  <img src="../../assets/cars/{{car.image_path}}" [alt]="car.model_name" class="product-image" />
                               </div>
                               <div>
-                                  <h4 class="p-mb-1">{{car.name}}</h4>
+                                  <h4 class="p-mb-1">{{car.brand_name}}</h4>
+                                  <h4 class="p-mb-1">{{car.model_name}}</h4>
                                   <h6 class="p-mt-0 p-mb-3">{{car.year}}</h6>
                               </div>
                           </div>
@@ -136,16 +137,16 @@
                   </ng-template>
                 </p-carousel>
               </ng-template>
-              <ng-template *ngIf="eventData.cathegory === 'Monomarca' || eventData.cathegory === 'GT3 Porsche Cup'" pTemplate="footer">
-                {{eventData.car.year}}
+              <ng-template *ngIf="eventData.cathegory.id != 25" pTemplate="footer">
+                {{eventData.carOptions[0].year}}
               </ng-template>
             </p-card>
             <div *ngIf="isSpecialEvent()" class="container">
               <div class="row" style="justify-content: center;">
-                <div class="col-4 mb-3" *ngFor="let car of eventData.specialEventCars">
+                <div class="col-4 mb-3" *ngFor="let car of eventData.carOptions">
                   <p-card header="{{car.name}}" styleClass="p-card-shadow" class="car">
                     <ng-template pTemplate="header">
-                        <img alt="Card" src="assets/cars/{{car.img}}">
+                        <img alt="Card" src="assets/cars/{{car.image_path}}">
                     </ng-template>
                     <ng-template pTemplate="footer">
                       {{car.year}}
@@ -162,3 +163,4 @@
 
   <button style="bottom: 0; right: 0; position: fixed; margin: 0 40px 20px 0;" pButton pRipple type="button" label="Print PDF" class="p-button-outlined p-button-rounded p-button-danger no-print" (click)="printPDF()"></button>
 </div>
+<p-progressSpinner *ngIf="!dataReady" style="position: absolute; height: 99.5vh; width: 99.99vw; z-index: 10; top: 0; text-align: center; padding-top: 20%; background-color: rgba(0,0,0,0.7);"></p-progressSpinner>
