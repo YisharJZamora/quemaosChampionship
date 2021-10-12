@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventCreatorService } from '../event-creator.service';
 import { EventClassificationService } from '../event-classification.service';
 import { EventRaces } from '../json/eventRaces';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-event-randomizer',
@@ -14,32 +15,17 @@ export class EventRandomizerComponent implements OnInit {
   eventRaces = new EventRaces();
   rowConditions = [1];
 
-	responsiveOptions: any;
   constructor(
     private eventCreator: EventCreatorService,
-    private eventClassification: EventClassificationService
-  ) {
-		this.responsiveOptions = [
-            {
-                breakpoint: '1024px',
-                numVisible: 3,
-                numScroll: 3
-            },
-            {
-                breakpoint: '768px',
-                numVisible: 2,
-                numScroll: 2
-            },
-            {
-                breakpoint: '560px',
-                numVisible: 1,
-                numScroll: 1
-            }
-        ];
-  }
+    private eventClassification: EventClassificationService,
+    private requestService: RequestService
+  ) {}
 
   ngOnInit(): void {
     this.eventData = this.eventCreator.getEvent();
+    this.requestService.getAllCars().subscribe((data) => {
+      console.log(data);
+    });
   }
 
   isSpecialEvent() {
