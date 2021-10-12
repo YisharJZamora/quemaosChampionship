@@ -19,4 +19,7 @@ export class RequestService {
   getEvent() {
     return this.http.get(`${this.baseUrl}/newEvent`)
   }
+  getUnofficialEvent() {
+    return this.http.get(`${this.baseUrl}/newEventUnofficial`)
+  }
 }
