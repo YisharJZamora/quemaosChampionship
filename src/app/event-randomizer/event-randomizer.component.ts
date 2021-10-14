@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EventRaces } from '../json/eventRaces';
 import { RequestService } from '../services/request.service';
+import { AdminService } from '../services/admin.service';
+import { AttrAst } from '@angular/compiler';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-event-randomizer',
@@ -13,17 +16,45 @@ export class EventRandomizerComponent implements OnInit {
   eventRaces = new EventRaces();
   rowConditions = [1];
   dataReady = false;
+  isEventDate = false;
+  nextEventDate = '';
 
   constructor(
-    private requestService: RequestService
+    private requestService: RequestService,
+    private adminService: AdminService,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
-    this.requestService.getUnofficialEvent().subscribe((data:any) => {
-      console.log(data)
-      this.eventData = data;
-      this.dataReady = true;
-    });
+    if(this.isAdminSection()){
+      this.requestService.getEvent().subscribe((data:any) => {
+        this.eventData = data;
+        this.dataReady = true;
+
+        this.requestService.getNextEventDate().subscribe((data:any) => {
+          if(data && data.length > 0) {
+            let dateString = data[0].date.replace(';', ' ');
+            let date = new Date(dateString);
+            let eventDate = this.datePipe.transform(date, 'dd-MM-yyyy HH:mm:ss') || '';
+            if(eventDate !== ''){
+              this.nextEventDate = 'Fecha del próximo evento: ' + eventDate;
+              this.isEventDate = date < new Date();
+            } else {
+              this.nextEventDate = 'Fecha no fijada';
+              this.isEventDate = false;
+            }
+          } else {
+            this.nextEventDate = 'Fecha no fijada';
+            this.isEventDate = false;
+          }
+        });
+      });
+    } else {
+      this.requestService.getUnofficialEvent().subscribe((data:any) => {
+        this.eventData = data;
+        this.dataReady = true;
+      });
+    }
   }
 
   isSpecialEvent() {
@@ -36,5 +67,11 @@ export class EventRandomizerComponent implements OnInit {
 
   getDate() {
     return (new Date()).toString().split('GMT')[0] + '(Islas Canarias)';
+  }
+  isAdminSection(){
+    return window.location.href.includes('official') && this.adminService.adminAccess;
+  }
+  window(): any{
+    return this.window;
   }
 }

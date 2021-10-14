@@ -22,4 +22,16 @@ export class RequestService {
   getUnofficialEvent() {
     return this.http.get(`${this.baseUrl}/newEventUnofficial`)
   }
+  launchAccessKey() {
+    return this.http.get(`${this.baseUrl}/api/auth/getAccessKey`)
+  }
+  checkAccessKey(key:any) {
+    return this.http.get(`${this.baseUrl}/api/auth/checkAccessKey/`+key)
+  }
+  getNextEventDate() {
+    return this.http.get(`${this.baseUrl}/nextDate`)
+  }
+  setNextEventDate(date: any) {
+    return this.http.get(`${this.baseUrl}/setNextDate/`+date)
+  }
 }

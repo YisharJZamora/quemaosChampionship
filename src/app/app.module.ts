@@ -21,6 +21,9 @@ import { HomeComponent } from './home/home.component';
 import {DividerModule} from 'primeng/divider';
 import {CarouselModule} from 'primeng/carousel';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {InputTextModule} from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -45,9 +48,11 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     DividerModule,
     CarouselModule,
     HttpClientModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    InputTextModule,
+    FormsModule
   ],
-  providers: [SharedModule, PrimeNGConfig],
+  providers: [SharedModule, PrimeNGConfig, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

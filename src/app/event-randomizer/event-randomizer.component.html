@@ -1,4 +1,5 @@
-<div *ngIf="dataReady" style="position: relative; height: 100%;">
+<div *ngIf="isAdminSection() && !isEventDate" style="margin-top: 10vh; text-align: center; color: white;">{{nextEventDate}}</div>
+<div *ngIf="(dataReady && !isAdminSection()) || (isAdminSection() && isEventDate)" style="position: relative; height: 100%;">
   <div class="only-print dateCertificate">
     Ajustes para Temporada {{eventData.season}} - Evento {{eventData.number}}
     <br>

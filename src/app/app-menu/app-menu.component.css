@@ -13,6 +13,17 @@
   margin-top: 0.5vh;
 }
 
+:host ::ng-deep .p-float-label > label {
+  top: 30%;
+  left: 0;
+  right: 0;
+  margin-top: 0;
+}
+
+:host ::ng-deep .p-float-label input.p-filled ~ label, .p-float-label input:focus ~ label {
+  top: -1.5rem;
+}
+
 .logoBox {
   width: fit-content;
   z-index: 10;

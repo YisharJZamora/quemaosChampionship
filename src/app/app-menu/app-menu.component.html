@@ -1,9 +1,67 @@
 <div style="position: relative;">
   <div class="logoBox">
-    <!-- <p class="logoText pr-3">Quemaos</p> -->
     <img class="menuLogo" src="../../assets/webImages/angry-bonfire-stroke-by-Vexels.svg"/>
     <p class="logoText">Quemaos Randomizaos</p>
     <img class="menuLogo" src="../../assets/webImages/angry-bonfire-stroke-by-Vexels.svg"/>
   </div>
   <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
+  <div class="container" *ngIf="adminVerified()">
+    <div class="row mt-1" style="text-align: center;">
+      <div class="col-6">
+        <button pButton pRipple type="button" label="Evento Oficial" class="p-button-outlined" (click)='goToAdminEvent()'></button>
+      </div>
+      <div class="col-6">
+        <button pButton pRipple type="button" label="Fecha Prox Evento" class="p-button-outlined" (click)='openNextEventDateModal()'></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="enableAdminAccess()" style="position: absolute; height: 99.5vh; width: 99.99vw; z-index: 10; top: 0; text-align: center; padding-top: 20%; background-color: rgba(0,0,0,0.7);">
+  <div style="height: 30vh; width: 30vw; background-color: #2d3744; border-radius: 6px; border-width: 2px; border-color: white; margin-left: auto; margin-right: auto;">
+    <div class="container pt-4">
+      <div class="row mt-5" style="text-align: center;">
+        <div class="col-12">
+          <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="accessKey" autocomplete="off">
+            <label for="float-input">Insertar clave</label>
+          </span>
+        </div>
+      </div>
+      <div class="row mt-5" style="text-align: center;">
+        <div class="col-4">
+          <button pButton pRipple type="button" label="Enviar clave" (click)="sendKey()" class="p-button-outlined"></button>
+        </div>
+        <div class="col-4">
+          <button pButton pRipple type="button" label="Acceder" (click)="tryAdminAccess()" class="p-button-outlined"></button>
+        </div>
+        <div class="col-4">
+          <button pButton pRipple type="button" label="Cerrar" class="p-button-danger p-button-outlined" (click)='closeModals()'></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="needNextEventDateModal()" style="position: absolute; height: 99.5vh; width: 99.99vw; z-index: 10; top: 0; text-align: center; padding-top: 20%; background-color: rgba(0,0,0,0.7);">
+  <div style="height: 30vh; width: 30vw; background-color: #2d3744; border-radius: 6px; border-width: 2px; border-color: white; margin-left: auto; margin-right: auto;">
+    <div class="container pt-4">
+      <div class="row mt-5" style="text-align: center;">
+        <div class="col-12">
+          <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="nextDate" autocomplete="off">
+            <label for="float-input">Próxima fecha de evento</label>
+          </span>
+        </div>
+      </div>
+      <div class="row mt-5" style="text-align: center;">
+        <div class="col-6">
+          <button pButton pRipple type="button" label="Asignar fecha" (click)="setNextEventDate()" class="p-button-outlined"></button>
+        </div>
+        <div class="col-6">
+          <button pButton pRipple type="button" label="Cerrar" class="p-button-danger p-button-outlined" (click)='closeModals()'></button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
