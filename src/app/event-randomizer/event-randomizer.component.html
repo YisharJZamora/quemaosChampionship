@@ -112,6 +112,9 @@
         </div>
       </div>
       <div class="col-xl-6 col-12 mb-4">
+        <div class="row mb-1 no-print" *ngIf="isAdminSection()" style="justify-content: center;">
+          <button pButton pRipple type="button" label="Insertar resultados" class="p-button-outlined" style="width: auto;" (click)='openSetResultsModal()'></button>
+        </div>
         <div class="row">
           <p-panel header="{{eventData.cathegory.name + ' - ' + eventData.name}}">
             <p-card *ngIf="!isSpecialEvent()" header="{{eventData.cathegory.id != 25 ? eventData.carOptions[0].brand_name + ' ' + eventData.carOptions[0].model_name : 'Prohibido coches de DLCs'}}" styleClass="p-card-shadow"  class="car">
@@ -164,4 +167,29 @@
 
   <button style="bottom: 0; right: 0; position: fixed; margin: 0 40px 20px 0;" pButton pRipple type="button" label="Print PDF" class="p-button-outlined p-button-rounded p-button-danger no-print" (click)="printPDF()"></button>
 </div>
-<p-progressSpinner *ngIf="!dataReady" style="position: absolute; height: 99.5vh; width: 99.99vw; z-index: 10; top: 0; text-align: center; padding-top: 20%; background-color: rgba(0,0,0,0.7);"></p-progressSpinner>
+
+<div *ngIf="openResultsModal" style="position: absolute; height: 99.5vh; width: 99.99vw; z-index: 10; top: 0; text-align: center; padding-top: 2%; background-color: rgba(0,0,0,0.7);">
+  <div class="container" style="min-height: 30vh; width: 30vw; background-color: #2d3744; border-radius: 6px; border-width: 2px; border-color: white; margin-left: auto; margin-right: auto;">
+    <div class="row pt-3" style="text-align: center;">
+      <div class="col-12 resultsTitle">Evento {{eventData.number}} - {{eventData.name}}</div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-4 resultsHeader">
+        Posición
+      </div>
+      <div class="col-4 resultsHeader">
+        Piloto
+      </div>
+      <div class="col-4 resultsHeader">
+        Coche
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div *ngIf="!dataReady" style="position: absolute; height: 99.5vh; width: 99.99vw; z-index: 10; top: 0; text-align: center; padding-top: 20%; background-color: rgba(0,0,0,0.7);">
+  <p-progressSpinner></p-progressSpinner>
+</div>

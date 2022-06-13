@@ -18,6 +18,7 @@ export class EventRandomizerComponent implements OnInit {
   dataReady = false;
   isEventDate = false;
   nextEventDate = '';
+  openResultsModal = false;
 
   constructor(
     private requestService: RequestService,
@@ -73,5 +74,11 @@ export class EventRandomizerComponent implements OnInit {
   }
   window(): any{
     return this.window;
+  }
+  openSetResultsModal() {
+    this.openResultsModal = true;
+  }
+  closeSetResultsModal() {
+    this.openResultsModal =  false;
   }
 }

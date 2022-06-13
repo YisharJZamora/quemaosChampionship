@@ -9,6 +9,8 @@ import { DatePipe } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
+  //TESTING
+
   constructor(private requestService: RequestService,
     private datePipe: DatePipe) { }
 

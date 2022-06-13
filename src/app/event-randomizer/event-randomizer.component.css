@@ -15,6 +15,18 @@
   color: white;
 }
 
+.resultsTitle {
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+}
+
+.resultsHeader {
+  text-align: center;
+  font-size: 1.4rem;
+  color: white;
+}
+
 .mobileOnly {
   display: none;
 }
